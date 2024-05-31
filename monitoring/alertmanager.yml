@@ -1,0 +1,18 @@
+global:
+  smtp_smarthost: 'smtp.wiss-edu.ch:587'  # Annahme, dass dies der SMTP-Server ist, prüfe dies mit deinem IT-Team
+  smtp_from: 'alertmanager@wiss-edu.ch'  # Beispielsweise eine generische Absenderadresse für Alerts
+  smtp_auth_username: 'carlos.nepomuceno@wiss-edu.ch'  # Setze hier deinen SMTP-Benutzernamen
+  smtp_auth_password: 'deinemailpasswort'  # Setze hier dein SMTP-Passwort
+
+route:
+  group_by: ['alertname', 'priority']
+  group_wait: 10s
+  group_interval: 10m
+  repeat_interval: 1h
+  receiver: 'team-X-mails'
+
+receivers:
+- name: 'team-X-mails'
+  email_configs:
+  - to: 'carlos.nepomuceno@wiss-edu.ch'  # Deine E-Mail-Adresse
+    send_resolved: true
